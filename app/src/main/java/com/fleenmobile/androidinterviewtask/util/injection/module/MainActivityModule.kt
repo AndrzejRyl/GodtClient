@@ -4,6 +4,7 @@ import com.fleenmobile.androidinterviewtask.main.MainActivityContract
 import com.fleenmobile.androidinterviewtask.main.presentation.MainActivityPresenter
 import com.fleenmobile.androidinterviewtask.main.ui.MainActivity
 import com.fleenmobile.androidinterviewtask.util.injection.RuntimeScope
+import com.fleenmobile.androidinterviewtask.util.repository.Repository
 import dagger.Module
 import dagger.Provides
 
@@ -15,6 +16,6 @@ class MainActivityModule {
 
     @Provides
     @RuntimeScope
-    fun presenter(view: MainActivityContract.View): MainActivityContract.Presenter =
-            MainActivityPresenter(view)
+    fun presenter(view: MainActivityContract.View, repository: Repository)
+            : MainActivityContract.Presenter = MainActivityPresenter(view, repository)
 }
