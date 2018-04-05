@@ -15,6 +15,34 @@ class MainActivityPresenter(
 ) : MainActivityContract.Presenter {
 
     override fun initialize() {
+        downloadRecipesList()
+        setupSearchBar()
+    }
+
+    private fun setupSearchBar() {
+        compositeDisposable.add(
+                view
+                        .getSearchTextWatcher()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnNext { view.showProgress() }
+                        .switchMap { repository.filteredRecipes(it) }
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                {
+                                    view.showRecipes(it)
+                                    view.hideProgress()
+                                },
+                                {
+                                    Timber.e(it)
+                                    view.showError("There was a problem with connection. Try again.")
+                                }
+                        )
+        )
+    }
+
+    private fun downloadRecipesList() {
         compositeDisposable.add(
                 repository
                         .recipes()
@@ -34,10 +62,6 @@ class MainActivityPresenter(
 
     override fun clear() {
         compositeDisposable.clear()
-    }
-
-    override fun onSearchTerm(term: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onIngredientsSelected(ingredients: List<Ingredient>) {

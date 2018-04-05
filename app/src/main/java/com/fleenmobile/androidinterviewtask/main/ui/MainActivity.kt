@@ -2,6 +2,7 @@ package com.fleenmobile.androidinterviewtask.main.ui
 
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
+import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import butterknife.BindView
@@ -14,16 +15,26 @@ import com.fleenmobile.androidinterviewtask.main.MainActivityContract
 import com.fleenmobile.androidinterviewtask.main.adapter.RecipesAdapter
 import com.fleenmobile.androidinterviewtask.show
 import com.fleenmobile.androidinterviewtask.showToast
+import com.jakewharton.rxbinding2.widget.RxTextView
+import io.reactivex.Observable
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class MainActivity : BaseActivity<MainActivityContract.Presenter>(),
         MainActivityContract.View {
+
+    companion object {
+        const val EDIT_TEXT_TIMEOUT = 600L
+    }
 
     @BindView(R.id.recipe_list)
     lateinit var recipesRecyclerView: RecyclerView
 
     @BindView(R.id.progress_bar)
     lateinit var progressBar: ProgressBar
+
+    @BindView(R.id.search_bar)
+    lateinit var searchEditText: EditText
 
     @Inject
     lateinit var recipesAdapter: RecipesAdapter
@@ -66,5 +77,11 @@ class MainActivity : BaseActivity<MainActivityContract.Presenter>(),
     override fun showError(errorMessage: String) {
         showToast(errorMessage, Toast.LENGTH_LONG)
     }
+
+    override fun getSearchTextWatcher(): Observable<String> =
+            RxTextView
+                    .textChanges(searchEditText)
+                    .map { it.toString() }
+                    .debounce(EDIT_TEXT_TIMEOUT, TimeUnit.MILLISECONDS)
     //endregion
 }

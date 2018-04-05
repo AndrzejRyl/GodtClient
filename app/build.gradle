@@ -57,6 +57,9 @@ dependencies {
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    //RxBindings
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
 }
 repositories {
     mavenCentral()

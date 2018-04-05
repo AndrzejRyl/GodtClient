@@ -6,4 +6,6 @@ import io.reactivex.Observable
 interface Repository {
 
     fun recipes(): Observable<List<Recipe>>
+
+    fun filteredRecipes(searchTerm: String): Observable<List<Recipe>>
 }

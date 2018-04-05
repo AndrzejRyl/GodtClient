@@ -5,6 +5,7 @@ import com.fleenmobile.androidinterviewtask.data.IngredientElement
 import com.fleenmobile.androidinterviewtask.data.Recipe
 import com.fleenmobile.androidinterviewtask.data.RecipeImage
 import io.reactivex.Observable
+import java.util.concurrent.TimeUnit
 
 class RepositoryImpl : Repository {
 
@@ -22,4 +23,21 @@ class RepositoryImpl : Repository {
                 )
         )
     }
+
+    override fun filteredRecipes(searchTerm: String): Observable<List<Recipe>> =
+            recipes()
+                    .flatMapIterable { it }
+                    .filter {
+                        val matchesTitle = it.title.toLowerCase().contains(searchTerm.toLowerCase())
+                        val matchesIngredients =
+                                it.ingredients
+                                        .map { it.elements }
+                                        .map { it.joinToString() }
+                                        .filter { it.toLowerCase().contains(searchTerm.toLowerCase()) }
+                                        .count() > 0
+
+                        return@filter matchesTitle || matchesIngredients
+                    }
+                    .toList()
+                    .toObservable()
 }
