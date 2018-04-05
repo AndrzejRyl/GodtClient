@@ -37,6 +37,7 @@ class MainActivityPresenter(
                                 {
                                     Timber.e(it)
                                     view.showError("There was a problem with connection. Try again.")
+                                    view.hideProgress()
                                 }
                         )
         )
