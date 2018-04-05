@@ -10,6 +10,7 @@ import dagger.Component
 import dagger.Module
 import dagger.Provides
 import dagger.android.AndroidInjectionModule
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Scope
 import javax.inject.Singleton
 
@@ -23,6 +24,9 @@ class AppModule {
     @Provides
     fun context(application: Application): Context =
             application
+
+    @Provides
+    fun compositeDisposable(): CompositeDisposable = CompositeDisposable()
 }
 
 @Singleton
