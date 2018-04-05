@@ -2,6 +2,7 @@ package com.fleenmobile.androidinterviewtask
 
 import android.app.Activity
 import android.app.Application
+import com.fleenmobile.androidinterviewtask.util.injection.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -26,9 +27,11 @@ class BaseApp : Application(), HasActivityInjector {
         initAppComponent()
     }
 
-    private fun initAppComponent() {
-        //todo
-    }
+    private fun initAppComponent() =
+            DaggerAppComponent.builder()
+                    .application(this)
+                    .build()
+                    .inject(this)
 
     private fun initTimber() {
         Timber.plant(Timber.DebugTree())
