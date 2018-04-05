@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AndroidInterviewTask</string>
+    <string name="ingredients">Ingredients</string>
 </resources>
