@@ -17,8 +17,13 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'GODT_BASE_URL', GODT_BASE_URL
+        }
+        debug {
+            minifyEnabled false
+            buildConfigField 'String', 'GODT_BASE_URL', GODT_BASE_URL
         }
     }
 }
@@ -60,6 +65,12 @@ dependencies {
 
     //RxBindings
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:3.9.1"
 }
 repositories {
     mavenCentral()
