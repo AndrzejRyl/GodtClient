@@ -73,7 +73,7 @@ class MainActivity : BaseActivity<MainActivityContract.Presenter>(),
     }
 
     override fun showIngredients(ingredients: List<Ingredient>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        showToast("not implemented", Toast.LENGTH_LONG)
     }
 
     override fun showError(errorMessage: String) {
