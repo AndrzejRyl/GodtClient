@@ -1,9 +1,11 @@
 package com.fleenmobile.androidinterviewtask.main.presentation
 
 import com.fleenmobile.androidinterviewtask.main.MainActivityContract
+import com.fleenmobile.androidinterviewtask.util.repository.Repository
 
 class MainActivityPresenter(
-        private val view: MainActivityContract.View
+        private val view: MainActivityContract.View,
+        private val repository: Repository
 ) : MainActivityContract.Presenter {
 
     override fun initialize() {
