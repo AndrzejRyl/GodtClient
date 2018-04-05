@@ -2,7 +2,7 @@ package com.fleenmobile.androidinterviewtask.data
 
 data class IngredientElement(
         val name: String,
-        private val amount: Int,
+        private val amount: Double,
         private val symbol: String) {
     fun amountWithUnits() = "$amount $symbol"
 }

@@ -11,6 +11,7 @@ import com.fleenmobile.androidinterviewtask.R
 import com.fleenmobile.androidinterviewtask.data.Ingredient
 import com.fleenmobile.androidinterviewtask.data.Recipe
 import com.fleenmobile.androidinterviewtask.hide
+import com.fleenmobile.androidinterviewtask.hideKeyboard
 import com.fleenmobile.androidinterviewtask.main.MainActivityContract
 import com.fleenmobile.androidinterviewtask.main.adapter.RecipesAdapter
 import com.fleenmobile.androidinterviewtask.show
@@ -63,6 +64,7 @@ class MainActivity : BaseActivity<MainActivityContract.Presenter>(),
     override fun showProgress() {
         recipesRecyclerView.hide()
         progressBar.show()
+        hideKeyboard()
     }
 
     override fun hideProgress() {

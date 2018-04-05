@@ -23,9 +23,9 @@ class MainActivityPresenter(
         compositeDisposable.add(
                 view
                         .getSearchTextWatcher()
-                        .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .doOnNext { view.showProgress() }
+                        .observeOn(Schedulers.io())
                         .switchMap { repository.filteredRecipes(it) }
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
