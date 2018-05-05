@@ -1,7 +1,8 @@
-# AndroidInterviewTasks
+# Godt Client
 
-This is a repository containing tasks I've completed on behalf of recruiters.
+Task description is available in `Android Developer assignment godt_no.pdf`  file.
 
-## Branches 
-Master branch contains initial Kotlin project as a base for every task.
-Each task has it's own branch.
+## WARNING
+You need to provide GODT_BASE_URL in your main gradle.properties file. 
+For now this line accurate:
+GODT_BASE_URL="http://www.godt.no/api/"
